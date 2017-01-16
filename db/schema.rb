@@ -60,12 +60,13 @@ ActiveRecord::Schema.define(version: 20170116070230) do
   create_table "subjects", force: :cascade do |t|
     t.integer  "parent_id"
     t.string   "title"
-    t.integer  "note_taker_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
+    t.string   "tag_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
