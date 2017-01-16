@@ -1,0 +1,2 @@
+class NodeModule < ApplicationRecord
+end
