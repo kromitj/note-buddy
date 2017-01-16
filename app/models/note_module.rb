@@ -1,0 +1,2 @@
+class NoteModule < ApplicationRecord
+end
