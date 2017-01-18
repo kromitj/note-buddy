@@ -1,22 +1,4 @@
 require 'faker'
-# - User schema -
-# User(id: integer, f_name: string, l_name: string, username: string, password_digest: string, created_at: datetime, updated_at: datetime)
-
-# - Subject schema -
-# Subject(id: integer, parent_id: integer, title: string, note_taker_id: integer, created_at: datetime, updated_at: datetime)
-
-# - Topic Schema -
-# Topic(id: integer, subject_id: integer, title: string, created_at: datetime, updated_at: datetime)
-
-# - Tag Schema -
-# Tag(id: integer, tag_name: string, created_at: datetime, updated_at: datetime)
-
-# - Note_Module Schema -
-# NoteModule(id: integer, topic_id: integer, module_type: string, created_at: datetime, updated_at: datetime)
-
-# - Note_Tag Schema -
-# NoteTag(tag_id: integer, note_module_id: integer, created_at: datetime, updated_at: datetime)
-
 
 # -- Faker Data --
 
@@ -41,9 +23,14 @@ tags = {
 module_types = ["note_resource", "note_question", "note_general", "note_term"]
 
 # --- User Seed ---
+# - User schema -
+# User(id: integer, f_name: string, l_name: string, username: string, password_digest: string, created_at: datetime, updated_at: datetime)
+
 User.create(f_name: "Mitch", l_name: "Kroska", username: "kromitj", password_digest: "password")
 
 # --- Subject Seed ---
+# - Subject schema -
+# Subject(id: integer, parent_id: integer, title: string, note_taker_id: integer, created_at: datetime, updated_at: datetime)
 
 mitch = User.first
 
@@ -53,6 +40,8 @@ end
 
 
 # --- Topic Seed ---
+# - Topic Schema -
+# Topic(id: integer, subject_id: integer, title: string, created_at: datetime, updated_at: datetime)
 
 subjects.each do |subject|
 	current_subject = mitch.subjects.where(title: subject).first
@@ -64,6 +53,8 @@ subjects.each do |subject|
 end
 
 # --- Tag Seed ---
+# - Tag Schema -
+# Tag(id: integer, tag_name: string, created_at: datetime, updated_at: datetime)
 
 topics.values.flatten.each do |topic|
 	current_tags = tags[topic]
@@ -73,6 +64,8 @@ topics.values.flatten.each do |topic|
 end
 
 # --- NoteModule Seed ---
+# - Note_Module Schema -
+# NoteModule(id: integer, topic_id: integer, module_type: string, created_at: datetime, updated_at: datetime)
 
 # uses module_types faker data
 module_index = 0 # loops(0..3) through 4 module_types
@@ -86,6 +79,9 @@ end
 
 
 # --- NoteTags Seed ---
+# - Note_Tag Schema -
+# NoteTag(tag_id: integer, note_module_id: integer, created_at: datetime, updated_at: datetime)
+
 note_module_num = 1 # iteratates(1..25) +=1 for every 3 tags
 Tag.all.each do |tag|	# iterates(1..75)
 	NoteTag.create(tag_id: tag.id, note_module_id: note_module_num)
